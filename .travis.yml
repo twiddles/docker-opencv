@@ -2,13 +2,13 @@ language: bash
 services: docker
 
 env:
-  - VERSION=3
-  - VERSION=3.5
+  - PYTHON_VERSION=3
+  - PYTHON_VERSION=3.5
 
 before_script:
   - env | sort
-  - cd "$VERSION"
-  - image="mvonrohr/opencv:python-$VERSION"
+  - cd "$PYTHON_VERSION"
+  - image="mvonrohr/opencv:3.0.1-python-$PYTHON_VERSION"
 
 script:
   - docker build -t "$image" .
