@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y build-essential cmake pkg-config \
 		libatlas-base-dev gfortran \
 		python3.5 python3.5-numpy python3.5-dev wget unzip
 
-RUN wget -O opencv.zip https://github.com/Itseez/opencv/archive/3.1.0.zip  && unzip opencv.zip && rm opencv.zip
+RUN wget -O opencv.zip https://github.com/Itseez/opencv/archive/3.1.0.zip  && unzip opencv.zip && rm opencv.zip \
     && wget -O opencv_contrib.zip https://github.com/Itseez/opencv_contrib/archive/3.1.0.zip && unzip opencv_contrib.zip && rm opencv_contrib.zip \
     && mkdir -p /opencv-3.1.0/build && cd /opencv-3.1.0/build \
 	&& cmake -D CMAKE_BUILD_TYPE=RELEASE \
