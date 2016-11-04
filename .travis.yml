@@ -2,16 +2,19 @@ language: bash
 services: docker
 
 env:
-  - PYTHON_VERSION=3
-  - PYTHON_VERSION=3.5
+  global:
+    - OPENCV_VERSION=3.1.0
+  matrix:
+    - PYTHON_VERSION=3
+    - PYTHON_VERSION=3.5
+    - PYTHON_VERSION=2.7
 
 before_script:
   - env | sort
-  - cd "$PYTHON_VERSION"
-  - image="mvonrohr/opencv:3.1.0-python-$PYTHON_VERSION"
+  - image="mvonrohr/opencv:$OPENCV_VERSION-python-$PYTHON_VERSION"
 
 script:
-  - docker build -t "$image" .
+  - docker build --build-arg OPENCV_VERSION=$OPENCV_VERSION --build-arg PYTHON_VERSION=$PYTHON_VERSION -t "$image" .
   - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
   - docker push "$image"
 
