@@ -1,0 +1,17 @@
+language: bash
+services: docker
+
+env:
+  - VERSION=3
+  - VERSION=3.5
+
+before_script:
+  - env | sort
+  - cd "$VERSION"
+  - image="gcc:$VERSION"
+
+script:
+  - docker build -t "$image" .
+
+after_script:
+  - docker images
