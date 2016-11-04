@@ -8,10 +8,12 @@ env:
 before_script:
   - env | sort
   - cd "$VERSION"
-  - image="gcc:$VERSION"
+  - image="mvonrohr/opencv:python-$VERSION"
 
 script:
   - docker build -t "$image" .
+  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker push "$image"
 
 after_script:
   - docker images
