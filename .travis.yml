@@ -15,7 +15,7 @@ before_script:
 
 script:
   - docker build --build-arg OPENCV_VERSION=$OPENCV_VERSION --build-arg PYTHON_VERSION=$PYTHON_VERSION -t "$image" .
-  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker push "$image"
 
 after_script:
